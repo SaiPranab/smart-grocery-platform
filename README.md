@@ -1,0 +1,1 @@
+# smart-grocery-platform
