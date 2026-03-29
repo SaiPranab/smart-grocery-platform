@@ -1,0 +1,40 @@
+server:
+  port: 1200 # The React app will call localhost:1200
+
+spring:
+  application:
+    name: api-gateway
+  config:
+    # Tell the gateway to fetch its config from our Config Server
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173" # Our future React app
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+      # We will add more routes as we build the services
+      routes:
+        - id: auth-service
+          uri: lb://auth-service # "lb://" tells it to use Eureka for load balancing
+          predicates:
+            - Path=/api/auth/**
+        - id: user-service
+          uri: lb://user-service # "lb://" tells it to use Eureka for load balancing
+          predicates:
+            - Path=/api/user/**
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/products/**

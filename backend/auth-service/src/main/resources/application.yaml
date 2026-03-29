@@ -1,0 +1,26 @@
+server:
+  port: 1201
+
+spring:
+  application:
+    name: auth-service
+
+  datasource:
+    # Pointing to our local Postgres Docker container
+    url: jdbc:postgresql://localhost:5432/grocery_db
+    username: postgres
+    password: tiger
+  jpa:
+    hibernate:
+      ddl-auto: update # Great for dev, use Flyway/Liquibase for Prod!
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+# Custom JWT properties
+jwt:
+  # In a real app, this should be a complex, securely injected 256-bit key from the Config Server
+  secret: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437

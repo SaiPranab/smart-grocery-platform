@@ -1,0 +1,20 @@
+server:
+  port: 1202
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    # We use the same database, but Spring Data JPA will create a separate 'user_profiles' table
+    url: jdbc:postgresql://localhost:5432/grocery_db
+    username: postgres
+    password: tiger
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
