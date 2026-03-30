@@ -1,0 +1,20 @@
+server:
+  port: 1203
+
+spring:
+  application:
+    name: product-service
+  datasource:
+    # Sharing the local DB, but JPA will create a isolated 'products' table
+    url: jdbc:postgresql://localhost:5432/grocery_db
+    username: postgres
+    password: tiger
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
