@@ -1,0 +1,16 @@
+server:
+  port: 1204
+
+spring:
+  application:
+    name: price-aggregator
+  # Configure the connection to our local Docker Redis container
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
